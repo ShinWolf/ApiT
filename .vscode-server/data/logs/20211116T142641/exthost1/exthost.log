@@ -1,0 +1,12 @@
+[2021-11-16 14:26:43.066] [exthost] [info] extension host started
+[2021-11-16 14:26:43.100] [exthost] [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch {"startup":true,"extensionId":{"value":"vscode.debug-auto-launch","_lower":"vscode.debug-auto-launch"},"activationEvent":"*"}
+[2021-11-16 14:26:43.101] [exthost] [info] ExtensionService#loadCommonJSModule file:///var/www/html/.vscode-server/bin/26076a4de974ead31f97692a0d32f90d735645c0/extensions/debug-auto-launch/dist/extension
+[2021-11-16 14:26:43.104] [exthost] [info] ExtensionService#_doActivateExtension vscode.emmet {"startup":true,"extensionId":{"value":"vscode.emmet","_lower":"vscode.emmet"},"activationEvent":"*"}
+[2021-11-16 14:26:43.104] [exthost] [info] ExtensionService#loadCommonJSModule file:///var/www/html/.vscode-server/bin/26076a4de974ead31f97692a0d32f90d735645c0/extensions/emmet/dist/extension
+[2021-11-16 14:26:43.126] [exthost] [info] ExtensionService#_doActivateExtension vscode.git {"startup":true,"extensionId":{"value":"vscode.git","_lower":"vscode.git"},"activationEvent":"*"}
+[2021-11-16 14:26:43.126] [exthost] [info] ExtensionService#loadCommonJSModule file:///var/www/html/.vscode-server/bin/26076a4de974ead31f97692a0d32f90d735645c0/extensions/git/dist/main
+[2021-11-16 14:26:43.167] [exthost] [info] ExtensionService#_doActivateExtension vscode.merge-conflict {"startup":true,"extensionId":{"value":"vscode.merge-conflict","_lower":"vscode.merge-conflict"},"activationEvent":"*"}
+[2021-11-16 14:26:43.167] [exthost] [info] ExtensionService#loadCommonJSModule file:///var/www/html/.vscode-server/bin/26076a4de974ead31f97692a0d32f90d735645c0/extensions/merge-conflict/dist/extension
+[2021-11-16 14:26:43.169] [exthost] [info] ExtensionService#_doActivateExtension vscode.search-result {"startup":true,"extensionId":{"value":"vscode.search-result","_lower":"vscode.search-result"},"activationEvent":"*"}
+[2021-11-16 14:26:43.170] [exthost] [info] ExtensionService#loadCommonJSModule file:///var/www/html/.vscode-server/bin/26076a4de974ead31f97692a0d32f90d735645c0/extensions/search-result/dist/extension.js
+[2021-11-16 14:26:43.171] [exthost] [info] eager extensions activated

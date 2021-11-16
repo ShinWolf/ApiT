@@ -1,0 +1,36 @@
+[2021-11-16 14:26:42.026] [remoteagent] [info] 
+
+*
+* Visual Studio Code Server
+*
+* Reminder: You may only use this software with Visual Studio family products,
+* as described in the license https://aka.ms/vscode-remote/license
+*
+
+
+[2021-11-16 14:26:42.026] [remoteagent] [info] Extension host agent started.
+[2021-11-16 14:26:42.480] [remoteagent] [info] [127.0.0.1][b6872fcc][ManagementConnection] New connection established.
+[2021-11-16 14:26:42.484] [remoteagent] [info] [127.0.0.1][3a4e1f9e][ExtensionHostConnection] New connection established.
+[2021-11-16 14:26:42.556] [remoteagent] [info] [127.0.0.1][3a4e1f9e][ExtensionHostConnection] <853> Launched Extension Host Process.
+[2021-11-16 14:28:00.324] [remoteagent] [info] [127.0.0.1][b6872fcc][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+[2021-11-16 14:28:01.339] [remoteagent] [info] [127.0.0.1][3a4e1f9e][ExtensionHostConnection] <853> Extension Host Process exited with code: 0, signal: null.
+[2021-11-16 14:28:01.339] [remoteagent] [info] Last EH closed, waiting before shutting down
+[2021-11-16 14:28:04.434] [remoteagent] [info] Got delay-shutdown request while in shutdown timeout, delaying
+[2021-11-16 14:28:04.434] [remoteagent] [info] Cancelling previous shutdown timeout
+[2021-11-16 14:28:04.529] [remoteagent] [info] [127.0.0.1][032ffd0b][ManagementConnection] New connection established.
+[2021-11-16 14:28:04.531] [remoteagent] [info] [127.0.0.1][0b6cd041][ExtensionHostConnection] New connection established.
+[2021-11-16 14:28:04.534] [remoteagent] [info] [127.0.0.1][0b6cd041][ExtensionHostConnection] <933> Launched Extension Host Process.
+[2021-11-16 14:33:04.435] [remoteagent] [info] New EH opened, aborting shutdown
+[2021-11-16 15:18:25.316] [remoteagent] [info] Installing extension: mblode.twig-language-2
+[2021-11-16 15:18:26.169] [remoteagent] [info] Downloaded extension: mblode.twig-language-2 /tmp/b6bc99aa-c335-463b-a4ae-8cb53f669f45
+[2021-11-16 15:18:27.646] [remoteagent] [info] Extracted extension to /var/www/html/.vscode-server/extensions/.mblode.twig-language-2-0.9.2: mblode.twig-language-2
+[2021-11-16 15:18:27.646] [remoteagent] [info] Renamed to /var/www/html/.vscode-server/extensions/mblode.twig-language-2-0.9.2
+[2021-11-16 15:18:27.649] [remoteagent] [info] Installation completed. mblode.twig-language-2
+[2021-11-16 15:18:27.694] [remoteagent] [info] Extensions installed successfully: mblode.twig-language-2
+[2021-11-16 15:18:29.849] [remoteagent] [info] [127.0.0.1][032ffd0b][ManagementConnection] The client has disconnected, will wait for reconnection 3h before disposing...
+[2021-11-16 15:18:37.599] [remoteagent] [info] [127.0.0.1][032ffd0b][ManagementConnection] Another client has connected, will shorten the wait for reconnection 5m before disposing...
+[2021-11-16 15:18:37.600] [remoteagent] [info] [127.0.0.1][ee97f6bf][ExtensionHostConnection] New connection established.
+[2021-11-16 15:18:37.611] [remoteagent] [info] [127.0.0.1][ee97f6bf][ExtensionHostConnection] <2084> Launched Extension Host Process.
+[2021-11-16 15:18:37.621] [remoteagent] [info] [127.0.0.1][a60339d1][ManagementConnection] New connection established.
+[2021-11-16 15:23:37.599] [remoteagent] [info] [127.0.0.1][032ffd0b][ManagementConnection] The reconnection short grace time of 5m has expired, so the connection will be disposed.
+[2021-11-16 15:23:38.637] [remoteagent] [info] [127.0.0.1][0b6cd041][ExtensionHostConnection] <933> Extension Host Process exited with code: 0, signal: null.
