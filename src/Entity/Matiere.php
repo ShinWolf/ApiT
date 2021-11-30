@@ -6,10 +6,13 @@ use App\Repository\MatiereRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=MatiereRepository::class)
  */
+#[ApiResource(normalizationContext:['groups' => ['read']], itemOperations:['GET'], collectionOperations:['GET'])]
 class Matiere
 {
     /**
@@ -17,16 +20,19 @@ class Matiere
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
+    #[Groups(["read"])]
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
+    #[Groups(["read"])]
     private $libelle;
 
     /**
      * @ORM\OneToMany(targetEntity=TypeCompetence::class, mappedBy="matiere")
      */
+    #[Groups(["read"])]
     private $typeCompetences;
 
     public function __construct()

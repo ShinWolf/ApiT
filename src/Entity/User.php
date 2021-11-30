@@ -12,7 +12,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
-#[ApiResource()]
+#[ApiResource(normalizationContext:['groups' => ['read']], itemOperations: ["get", "patch"=>["security"=>"is_granted('ROLE_ADMIN') or object == user"]])]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
@@ -20,22 +20,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
+    #[Groups(["read"])]
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      */
+    #[Groups(["read"])]
     private $email;
 
     /**
      * @ORM\Column(type="json")
      */
+    #[Groups(["read"])]
     private $roles = [];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
+    #[Groups(["read"])]
     private $password;
 
     /**

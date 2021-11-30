@@ -11,7 +11,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ORM\Entity(repositoryClass=CompetenceRepository::class)
  */
-#[ApiResource(normalizationContext:['groups' => ['read']])]
+#[ApiResource(normalizationContext:['groups' => ['read']], itemOperations:['GET'], collectionOperations:['GET'])]
 class Competence
 {
     /**
@@ -25,6 +25,7 @@ class Competence
     /**
      * @ORM\Column(type="string", length=255)
      */
+    #[Groups(["read"])]
     private $libelle;
 
     /**
