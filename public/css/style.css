@@ -16,7 +16,7 @@ html, body {
 body {
   display: flex;
   flex-direction: row;
-  background-color: #ffffff;
+  background: linear-gradient(#ac5b04, #165e7c);;
 }
 
 header {
@@ -24,7 +24,6 @@ header {
   flex-direction: row;
   align-items: center;
   padding: 1rem 0;
-  background: linear-gradient(to top, #30cfd0 -300%, #330867 50%);
 }
 header h1 {
   color:pink;
@@ -59,7 +58,7 @@ nav {
   height: 100vh;
   overflow: hidden;
   transition: width 500ms;
-  background-color: grey;
+  background: linear-gradient(#f69d3c, #3f87a6);;
 }
 nav .navItem, nav .navDivider {
   opacity: 0;
@@ -91,7 +90,7 @@ nav.open .navItem, nav.open .navDivider {
   text-transform: uppercase;
   color: white;
   font-weight: 600;
-  background-color: grey;
+  background: linear-gradient(#f69d3c, #3f87a6);
   border-radius: 0 1rem 1rem 0;
   transition: padding 500ms ease;
 }
