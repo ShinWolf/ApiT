@@ -6,10 +6,12 @@ use App\Repository\CompetenceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ORM\Entity(repositoryClass=CompetenceRepository::class)
  */
+#[ApiResource(normalizationContext:['groups' => ['read']])]
 class Competence
 {
     /**
@@ -17,6 +19,7 @@ class Competence
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
+        #[Groups(["read"])]
     private $id;
 
     /**
@@ -37,6 +40,7 @@ class Competence
     /**
      * @ORM\ManyToOne(targetEntity=TypeCompetence::class, inversedBy="competences")
      */
+        #[Groups(["read"])]
     private $typeCompetence;
 
     public function __construct()

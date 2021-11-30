@@ -1,19 +1,57 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-   
-        {% block stylesheets %}
-           
-        {% endblock %}
 
-        {% block contenu %}
-           
-        {% endblock %}
-    </head>
-    <body>
-    <a class="nav-link" href="{{path("inscription")}}">inscription</a>
-        {% block body %}{% endblock %}
-    </body>
+<html lang="fr">
+	<head>
+		<!-- Font Awesome -->
+		<script src="https://kit.fontawesome.com/1ec56b3b97.js" crossorigin="anonymous"></script>
+
+
+		<!-- Generic -->
+		<meta charset="UTF-8"/>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link
+		rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+		<link rel="stylesheet" href="css/style.css"/>
+		<title>
+			{% block title %}OFM
+			{% endblock %}
+		</title>
+	</head>
+
+	<body>
+		<nav id="navMenu">
+			
+			<a class="navItem" href="{{path("index")}}">Accueil</a>
+			<a class="navItem" href="{{path("inscription")}}">inscription</a>
+			<a class="navItem" href="{{path("ajoutCompetence")}}">Ajout competence</a>
+			
+			
+		</nav>				
+		
+			{% block header %}
+					
+			
+				{% endblock %}
+		<section id="pageContent">
+			<header>
+				<div id="menuButton">
+					Menu
+				</div>
+				
+			
+			
+					{% block contenu %}
+					</header>
+				{% endblock %}
+	
+		</section>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/navMenu.js"></script>
+		<script src="js/socket.io.js"></script>
+		<script src="js/client.js"></script>
+	</body>
+
 </html>

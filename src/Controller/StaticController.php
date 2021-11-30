@@ -25,4 +25,12 @@ class StaticController extends AbstractController
             'form'=>$form->createView()]);
         
     }
+
+     #[Route('/ajoutCompetence', name: 'ajoutCompetence')]
+     public function ajoutCompetence(): Response
+     {
+         return $this->render('static/ajoutCompetence.html.twig', [
+            ]);
+         
+     }
 }
