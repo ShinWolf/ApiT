@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="fr">
 	<head>
 		<!-- Font Awesome -->
@@ -9,43 +10,45 @@
 		<meta charset="UTF-8"/>
 
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<link
-		rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 		<link rel="stylesheet" href="css/style.css"/>
 		<title>
-			{% block title %}OFM
+			{% block title %}
 			{% endblock %}
 		</title>
+		<script src="js/jquery.min.js"></script>
 	</head>
 
 	<body>
 		<nav id="navMenu">
 			
-			<a class="navItem" href="index.php?page=accueil">Accueil</a>
+			<a class="navItem" href="{{path("index")}}">Accueil</a>
+			<a class="navItem" href="{{path("inscription")}}">inscription</a>
+			<a class="navItem" href="{{path("app_login")}}">Connexion</a>
+			<a class="navItem" href="{{path("ajoutCompetence")}}">Ajout competence</a>
 			
-			
-		</nav>
-		<section id="pageContent">
+		</nav>				
+		
+			{% block header %}
+					
+			{% endblock %}
+		<div id="pageContent">
 			<header>
 				<div id="menuButton">
 					Menu
 				</div>
-				<a class="nav-link" href="{{path("inscription")}}">inscription</a>
-			</header>
-			{% block contenu %}
-			{% endblock %}
+				
+					{% block contenu %}
+					</header>
+				{% endblock %}
+	
+		</div>
 
-			<footer>
-				<p class="text-muted">Copyright © 2020 OFM | Made by
-					<a class=" text-success" href="ofm.chef8.fr">lucas delfosse/memelyne ansart/éric fief</a>.</p>
-			</footer>
-		</section>
-		<script src="js/jquery.min.js"></script>
 		<script src="js/navMenu.js"></script>
-		<script src="js/socket.io.js"></script>
-		<script src="js/client.js"></script>
+		
+		{% block script %}
+		{% endblock %}
 	</body>
 
 </html>

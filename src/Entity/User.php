@@ -8,10 +8,11 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-
+use ApiPlatform\Core\Annotation\ApiResource;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
+#[ApiResource(normalizationContext:['groups' => ['read']], itemOperations: ["get", "patch"=>["security"=>"is_granted('ROLE_ADMIN') or object == user"]])]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
@@ -19,28 +20,42 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
+    #[Groups(["read"])]
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      */
+    #[Groups(["read"])]
     private $email;
 
     /**
      * @ORM\Column(type="json")
      */
+    #[Groups(["read"])]
     private $roles = [];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
+    #[Groups(["read"])]
     private $password;
 
     /**
      * @ORM\OneToMany(targetEntity=Atribuer::class, mappedBy="user")
      */
     private $atribuers;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $dateInscription;
+
+    /**
+     * @ORM\Column(type="string", length=25)
+     */
+    private $idUnique;
 
    
     public function __construct()
@@ -163,6 +178,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $atribuer->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDateInscription(): ?\DateTimeInterface
+    {
+        return $this->dateInscription;
+    }
+
+    public function setDateInscription(\DateTimeInterface $dateInscription): self
+    {
+        $this->dateInscription = $dateInscription;
+
+        return $this;
+    }
+
+    public function getIdUnique(): ?string
+    {
+        return $this->idUnique;
+    }
+
+    public function setIdUnique(string $idUnique): self
+    {
+        $this->idUnique = $idUnique;
 
         return $this;
     }

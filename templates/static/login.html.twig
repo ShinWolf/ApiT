@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block contenu %}
+
+{% if is_granted("ROLE") %}
+    Hi {{ app.user.username }}
+{% endif %}
+
+<div class="container">
+    <input type="email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Email" required autofocus>
+    <br>
+    <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Mot de passe" required>
+    <br>
+    <button class="btn btn-lg btn-primary btn-block" id="connect">Se connecter</button>
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script>
+
+$(document).ready(function() {
+
+    //var bt = document.getElementById("connect");
+    //bt.addEventListener("click", auth, false);
+
+
+    function auth() {
+        var request = $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            url: "https://s3-4377.nuage-peda.fr/MesCompetences/api/authentication_token",
+            method: "POST",
+            data: JSON.stringify({
+                email: "email43@hotmail.com",
+                password: "email43",
+
+            }),
+            dataType: "json",
+            beforeSend: function (xhr) {
+                xhr.overrideMimeType("application/json; charset=utf-8");
+            }
+        });
+
+        request.done(function (msg) {
+            console.log(msg.token);
+            localStorage.setItem('token', msg.token);
+        });
+
+        request.fail(function (jqXHR, textStatus, error) {
+            console.log(error);
+        });
+    }
+});
+
+</script>
+{% endblock %}
