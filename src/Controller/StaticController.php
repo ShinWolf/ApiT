@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Form\InscriptionType;
+use App\Form\AjoutCompetenceType;
 
 class StaticController extends AbstractController
 {
@@ -29,8 +30,9 @@ class StaticController extends AbstractController
      #[Route('/ajoutCompetence', name: 'ajoutCompetence')]
      public function ajoutCompetence(): Response
      {
+        $form = $this->createForm(AjoutCompetenceType::class);
          return $this->render('static/ajoutCompetence.html.twig', [
-            ]);
+            'form'=>$form->createView()]);
          
      }
 }

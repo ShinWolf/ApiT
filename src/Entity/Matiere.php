@@ -8,11 +8,10 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
-
 /**
  * @ORM\Entity(repositoryClass=MatiereRepository::class)
  */
-#[ApiResource(normalizationContext:['groups' => ['read']], itemOperations:['GET'], collectionOperations:['GET'])]
+#[ApiResource(normalizationContext:['groups' => ['read']],itemOperations:['GET'],collectionOperations:['GET'])]
 class Matiere
 {
     /**
@@ -32,7 +31,7 @@ class Matiere
     /**
      * @ORM\OneToMany(targetEntity=TypeCompetence::class, mappedBy="matiere")
      */
-    #[Groups(["read"])]
+    #[Groups(["read"])]   
     private $typeCompetences;
 
     public function __construct()

@@ -11,7 +11,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ORM\Entity(repositoryClass=CompetenceRepository::class)
  */
-#[ApiResource(normalizationContext:['groups' => ['read']], itemOperations:['GET'], collectionOperations:['GET'])]
+#[ApiResource(normalizationContext:['groups' => ['read']],itemOperations:['GET'],collectionOperations:['GET'])]
 class Competence
 {
     /**
@@ -19,13 +19,13 @@ class Competence
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-        #[Groups(["read"])]
+    #[Groups(["read"])]  
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    #[Groups(["read"])]
+   #[Groups(["read"])]  
     private $libelle;
 
     /**
@@ -41,7 +41,7 @@ class Competence
     /**
      * @ORM\ManyToOne(targetEntity=TypeCompetence::class, inversedBy="competences")
      */
-        #[Groups(["read"])]
+    
     private $typeCompetence;
 
     public function __construct()

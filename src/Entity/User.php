@@ -32,14 +32,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="json")
      */
-    #[Groups(["read"])]
+
     private $roles = [];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
-    #[Groups(["read"])]
+ 
     private $password;
 
     /**
