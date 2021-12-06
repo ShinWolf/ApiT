@@ -25,8 +25,6 @@ class StaticController extends AbstractController
     public function inscription(Request $request, UserPasswordHasherInterface $passwordHasher): Response
     {
         $utilisateur = new User();
-        $bytes = random_bytes(10);
-var_dump(bin2hex($bytes));
 
         $form = $this->createForm(InscriptionType::class, $utilisateur);
 
@@ -82,6 +80,22 @@ var_dump(bin2hex($bytes));
     public function ajoutCompetence(): Response
     {
         return $this->render('static/ajoutCompetence.html.twig', [
+        ]);
+         
+    }
+
+    #[Route('/contact', name: 'contact')]
+    public function contact(): Response
+    {
+        return $this->render('static/contact.html.twig', [
+        ]);
+         
+    }
+
+    #[Route('/mentionslegales', name: 'mentionslegales')]
+    public function mentionslegales(): Response
+    {
+        return $this->render('static/mentionslegales.html.twig', [
         ]);
          
     }
