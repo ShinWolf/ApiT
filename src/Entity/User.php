@@ -47,6 +47,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $atribuers;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $dateInscription;
+
+    /**
+     * @ORM\Column(type="string", length=25)
+     */
+    private $idUnique;
+
    
     public function __construct()
     {
@@ -168,6 +178,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $atribuer->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDateInscription(): ?\DateTimeInterface
+    {
+        return $this->dateInscription;
+    }
+
+    public function setDateInscription(\DateTimeInterface $dateInscription): self
+    {
+        $this->dateInscription = $dateInscription;
+
+        return $this;
+    }
+
+    public function getIdUnique(): ?string
+    {
+        return $this->idUnique;
+    }
+
+    public function setIdUnique(string $idUnique): self
+    {
+        $this->idUnique = $idUnique;
 
         return $this;
     }

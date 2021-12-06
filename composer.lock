@@ -2008,16 +2008,16 @@
         },
         {
             "name": "lexik/jwt-authentication-bundle",
-            "version": "v2.14.1",
+            "version": "v2.14.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lexik/LexikJWTAuthenticationBundle.git",
-                "reference": "66ef4199d00b9387a72543c15a168a659f61f192"
+                "reference": "41cd2596c77c8c20dac40ff9cdeba2645446cfb7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lexik/LexikJWTAuthenticationBundle/zipball/66ef4199d00b9387a72543c15a168a659f61f192",
-                "reference": "66ef4199d00b9387a72543c15a168a659f61f192",
+                "url": "https://api.github.com/repos/lexik/LexikJWTAuthenticationBundle/zipball/41cd2596c77c8c20dac40ff9cdeba2645446cfb7",
+                "reference": "41cd2596c77c8c20dac40ff9cdeba2645446cfb7",
                 "shasum": ""
             },
             "require": {
@@ -2027,7 +2027,7 @@
                 "php": ">=7.1",
                 "symfony/config": "^4.4|^5.3|^6.0",
                 "symfony/dependency-injection": "^4.4|^5.3|^6.0",
-                "symfony/deprecation-contracts": "^2.4",
+                "symfony/deprecation-contracts": "^2.4|^3.0",
                 "symfony/event-dispatcher": "^4.4|^5.3|^6.0",
                 "symfony/http-foundation": "^4.4|^5.3|^6.0",
                 "symfony/http-kernel": "^4.4|^5.3|^6.0",
@@ -2055,11 +2055,6 @@
                 "spomky-labs/lexik-jose-bridge": "Provides a JWT Token encoder with encryption support"
             },
             "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Lexik\\Bundle\\JWTAuthenticationBundle\\": ""
@@ -2116,7 +2111,7 @@
             ],
             "support": {
                 "issues": "https://github.com/lexik/LexikJWTAuthenticationBundle/issues",
-                "source": "https://github.com/lexik/LexikJWTAuthenticationBundle/tree/v2.14.1"
+                "source": "https://github.com/lexik/LexikJWTAuthenticationBundle/tree/v2.14.2"
             },
             "funding": [
                 {
@@ -2128,7 +2123,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-11-02T00:05:11+00:00"
+            "time": "2021-12-05T17:35:05+00:00"
         },
         {
             "name": "namshi/jose",
@@ -5652,16 +5647,16 @@
         },
         {
             "name": "symfony/security-bundle",
-            "version": "v5.3.11",
+            "version": "v5.3.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/security-bundle.git",
-                "reference": "c5419267a655c294109ee5241a99ac7b7b8203b8"
+                "reference": "be52715f4a7fd490937e4f881dc00ff5c0dcfeb3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/security-bundle/zipball/c5419267a655c294109ee5241a99ac7b7b8203b8",
-                "reference": "c5419267a655c294109ee5241a99ac7b7b8203b8",
+                "url": "https://api.github.com/repos/symfony/security-bundle/zipball/be52715f4a7fd490937e4f881dc00ff5c0dcfeb3",
+                "reference": "be52715f4a7fd490937e4f881dc00ff5c0dcfeb3",
                 "shasum": ""
             },
             "require": {
@@ -5734,7 +5729,7 @@
             "description": "Provides a tight integration of the Security component into the Symfony full-stack framework",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/security-bundle/tree/v5.3.11"
+                "source": "https://github.com/symfony/security-bundle/tree/v5.3.12"
             },
             "funding": [
                 {
@@ -5750,7 +5745,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-11-20T15:01:50+00:00"
+            "time": "2021-11-24T08:15:08+00:00"
         },
         {
             "name": "symfony/security-core",
@@ -7529,16 +7524,16 @@
         },
         {
             "name": "symfony/maker-bundle",
-            "version": "v1.36.3",
+            "version": "v1.36.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/maker-bundle.git",
-                "reference": "0f40c826c0725208c254ddcd3481690e6c7e5047"
+                "reference": "716eee9c8b10b33e682df1b7d80b9061887e9691"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/0f40c826c0725208c254ddcd3481690e6c7e5047",
-                "reference": "0f40c826c0725208c254ddcd3481690e6c7e5047",
+                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/716eee9c8b10b33e682df1b7d80b9061887e9691",
+                "reference": "716eee9c8b10b33e682df1b7d80b9061887e9691",
                 "shasum": ""
             },
             "require": {
@@ -7548,7 +7543,7 @@
                 "symfony/config": "^4.4|^5.0|^6.0",
                 "symfony/console": "^4.4|^5.0|^6.0",
                 "symfony/dependency-injection": "^4.4|^5.0|^6.0",
-                "symfony/deprecation-contracts": "^2.2",
+                "symfony/deprecation-contracts": "^2.2|^3",
                 "symfony/filesystem": "^4.4|^5.0|^6.0",
                 "symfony/finder": "^4.4|^5.0|^6.0",
                 "symfony/framework-bundle": "^4.4|^5.0|^6.0",
@@ -7597,7 +7592,7 @@
             ],
             "support": {
                 "issues": "https://github.com/symfony/maker-bundle/issues",
-                "source": "https://github.com/symfony/maker-bundle/tree/v1.36.3"
+                "source": "https://github.com/symfony/maker-bundle/tree/v1.36.4"
             },
             "funding": [
                 {
@@ -7613,7 +7608,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-11-22T18:44:03+00:00"
+            "time": "2021-12-01T00:27:38+00:00"
         }
     ],
     "aliases": [],
