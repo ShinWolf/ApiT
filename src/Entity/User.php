@@ -20,26 +20,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    #[Groups(["read"])]
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      */
-    #[Groups(["read"])]
     private $email;
 
     /**
      * @ORM\Column(type="json")
      */
-
     private $roles = [];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
- 
     private $password;
 
     /**
@@ -55,12 +51,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=25)
      */
+    #[Groups(["read"])]
     private $idUnique;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Contact::class, mappedBy="Util1")
+     */
+    private $contacts;
 
    
     public function __construct()
     {
         $this->atribuers = new ArrayCollection();
+        $this->contacts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -206,5 +209,34 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    /**
+     * @return Collection|Contact[]
+     */
+    public function getContacts(): Collection
+    {
+        return $this->contacts;
+    }
+
+    public function addContact(Contact $contact): self
+    {
+        if (!$this->contacts->contains($contact)) {
+            $this->contacts[] = $contact;
+            $contact->setUtil1($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContact(Contact $contact): self
+    {
+        if ($this->contacts->removeElement($contact)) {
+            // set the owning side to null (unless already changed)
+            if ($contact->getUtil1() === $this) {
+                $contact->setUtil1(null);
+            }
+        }
+
+        return $this;
+    }
   
 }

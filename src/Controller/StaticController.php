@@ -4,13 +4,15 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use App\Form\InscriptionType;
 use App\Form\AjoutCompetenceType;
+use App\Form\ContactType;
 use App\Entity\User;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use App\Entity\Contact;
 
 class StaticController extends AbstractController
 {
@@ -46,10 +48,7 @@ class StaticController extends AbstractController
                 //return $this->redirectToRoute('accueil');
             }
         }
-
-        return $this->render('static/inscription.html.twig', [
-            'form'=>$form->createView()]);
-        
+        return $this->render('static/inscription.html.twig', ['form'=>$form->createView()]);
     }
 
      #[Route('/ajoutCompetence', name: 'ajoutCompetence')]
@@ -87,9 +86,27 @@ class StaticController extends AbstractController
 
 
     #[Route('/contact', name: 'contact')]
-    public function contact(): Response
+    public function contact(Request $request): Response
     {
+        $contact = new Contact();
+        $form = $this->createForm(ContactType::class, $contact);
+
+        if ($request->isMethod('POST')){
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()){
+
+                $contact->setMessage($form->get('message')->getData());
+                $contact->setDateMessage(new \DateTime());
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($contact);
+                $em->flush();
+
+                //return $this->redirectToRoute('contact');
+            }
+        }
         return $this->render('static/contact.html.twig', [
+            'form'=>$form->createView()
         ]);
          
     }

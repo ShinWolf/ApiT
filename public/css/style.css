@@ -16,7 +16,7 @@ html, body {
 body {
   display: flex;
   flex-direction: row;
-  background: linear-gradient(#8400d1, #c70606);;
+  background: linear-gradient(#8400d1, #c70606);
 }
 
 header {

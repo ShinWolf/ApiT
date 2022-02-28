@@ -19,6 +19,8 @@
 			{% endblock %}
 			- Mes Compétences
 		</title>
+		{% block style %}
+		{% endblock %}
 		<script src="js/jquery.min.js"></script>
 	</head>
 
@@ -26,8 +28,9 @@
 		<nav id="navMenu">
 			
 			<a class="navItem" href="{{path("index")}}">Accueil</a>
-			<a class="navItem" href="{{path("inscription")}}">inscription</a>
+			<a class="navItem" href="{{path("inscription")}}">Inscription</a>
 			<a class="navItem" href="{{path("app_login")}}">Connexion</a>
+			<a class="navItem" href="{{path("contact")}}">Contact</a>
 			<a class="navItem" href="{{path("ajoutCompetence")}}">Ajout competence</a>
 			<a class="navItem" href="{{path("mentionslegales")}}">Mentions légales</a>
 			

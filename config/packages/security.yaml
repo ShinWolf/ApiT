@@ -51,4 +51,5 @@ security:
           }
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/user, roles: ROLE_USER }
+        - { path: ^/contact, roles: IS_AUTHENTICATED_FULLY }
         # { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
