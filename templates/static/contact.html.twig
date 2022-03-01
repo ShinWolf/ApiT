@@ -1,16 +1,89 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Connexion{% endblock %}
+{% block title %}Contact{% endblock %}
+
+{% block style %}
+
+<style>
+
+.container {
+  border: 2px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+}
+
+.darker {
+  border-color: #ccc;
+  background-color: #ddd;
+}
+
+.container::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.time-right {
+  float: right;
+  color: #aaa;
+}
+
+#main-container {
+  width: 350em;
+  height: 300em;
+  display: inline-block;
+  margin: -50px 330px 50px 330px;
+  /*margin: 0 auto;*/
+  border: 2px solid black;
+  border-radius: 12px;
+  /*padding: 4px;*/
+  overflow-y: scroll;
+}
+
+#user-container {
+  border: none;
+  font-size: 20px;
+}
+
+</style>
+
+{% endblock %}
 
 {% block contenu %}
+</header>
 
-<div class="container">
-    <input type="email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Email" required autofocus>
-    <br>
-    <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Mot de passe" required>
-    <br>
-    <button class="btn btn-lg btn-primary btn-block" id="connect">Se connecter</button>
+{% for e in app.user.Contacts %}
+
+<div class="container" id="main-container">
+  <div class="container" id="user-container">
+    <a style="color: rgb(0,0,255,1);"> {{app.user.IdUnique}} </a>  >>>  <a style="color: rgb(255,0,0,1);"> {{e.Util2.idUnique}} </a>
+  </div>
+  <div class="container" id="messages-container">
+
+  {% if e.Util1 == app.user %}
+  
+    <div class="container" {% if e.vu == 0 %} style="background-color: rgb(255,0,0,0.4);" {% endif %}>
+      {{app.user.idUnique}}
+      <br>
+      <p>{{e.message}}</p>
+      <span class="time-right" style="color: rgb(0,0,0,1);">{{e.dateMessage|date("g:i")}}</span>
+    </div>
+  {% elseif e.Util2 == app.user %}
+  
+    <div class="container darker" {% if e.vu == 0 %} style="background-color: rgb(255,0,0,0.4);" {% endif %}>
+      {{e.Util2.idUnique}}
+      <br>
+      <p>{{e.message}}</p>
+      <span class="time-right" style="color: rgb(0,0,0,1);">{{e.dateMessage|date("g:i")}}</span>
+    </div>
+
+  {% endif %}
+  
+  </div>
 </div>
+
+{% endfor %}
+
 
 {% endblock %}
 

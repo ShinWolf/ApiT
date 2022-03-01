@@ -3,6 +3,7 @@
 {% block title %}Inscription{% endblock %}
 
 {% block contenu %}
+</header>
 
 {{ form_start(form) }}
 
@@ -19,7 +20,7 @@
         </div>
 
         <div class="col">
-            {{ form_label(form.roles, 'Roles :', {'label_attr': {'class': 'fw-bold'}}) }}
+            {{ form_label(form.roles, 'Rôles :', {'label_attr': {'class': 'fw-bold'}}) }}
             <br>
             {{ form_widget(form.roles) }}
         </div>
