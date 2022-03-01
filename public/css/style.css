@@ -16,7 +16,7 @@ html, body {
 body {
   display: flex;
   flex-direction: row;
-  background: linear-gradient(#8400d1, #c70606);;
+  background: linear-gradient(#7012d5, #fdb211);;
 }
 
 header {
@@ -58,7 +58,8 @@ nav {
   height: 100vh;
   overflow: hidden;
   transition: width 500ms;
-  background: linear-gradient(#f69d3c, #3f87a6);;
+  background: linear-gradient(#862fe3, #ffc547);;
+  box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
 }
 nav .navItem, nav .navDivider {
   opacity: 0;
@@ -90,7 +91,8 @@ nav.open .navItem, nav.open .navDivider {
   text-transform: uppercase;
   color: white;
   font-weight: 600;
-  background: linear-gradient(#f69d3c, #3f87a6);
+  background: linear-gradient(#862fe3, #ffc547);
+  box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
   border-radius: 0 1rem 1rem 0;
   transition: padding 500ms ease;
 }
