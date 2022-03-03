@@ -6,5 +6,9 @@
 
 <h1>MesCompétences.dev</h1>
 </header>
-
+    {% if app.user %}
+    <h1>Bonjour</h1>
+     {% else %}
+        <a class="navItem" href="{{path("app_login")}}"><h2 style="color: white" >Connectez vous</h2></a>
+    {% endif %}
 {% endblock %}

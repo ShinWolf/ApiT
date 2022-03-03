@@ -7,6 +7,10 @@
 <h1>Ajout Competences</h1>
 </header>
 
+{% if app.user %}
+    <label>Votre id <label id="idtoi">{{ app.user.id }}</label></label>
+{% endif %}
+    <h5 style="color:red" id="reussi"></h5>
  <select name="sel" id="sel">
             <option value="0">Sélectionnez une matiere</option>
         </select>
