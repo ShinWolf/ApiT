@@ -88,6 +88,9 @@ class StaticController extends AbstractController
     #[Route('/contact', name: 'contact')]
     public function contact(Request $request): Response
     {
+        $repoContact = $this->getDoctrine()->getRepository(contact::class);
+        $contacts = $repoContact->findAll();
+
         $contact = new Contact();
         $form = $this->createForm(ContactType::class, $contact);
 
@@ -106,7 +109,8 @@ class StaticController extends AbstractController
             }
         }
         return $this->render('static/contact.html.twig', [
-            'form'=>$form->createView()
+            'form'=>$form->createView(),
+            'contacts'=>$contacts
         ]);
          
     }

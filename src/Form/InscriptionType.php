@@ -14,6 +14,9 @@ use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\Regex;
 
 
 class InscriptionType extends AbstractType
@@ -23,17 +26,29 @@ class InscriptionType extends AbstractType
         $builder
             ->add('email', EmailType::class)
             ->add('roles', CollectionType::class, [
-                'entry_type'   => ChoiceType::class,
-                'entry_options'  => [
+                'entry_type' => ChoiceType::class,
+                'entry_options' => [
                     'label' => false,
                     'choices' => [
                         'Utilisateur' => 'ROLE_USER',
                         'Administrateur' => 'ROLE_ADMIN',
                     ],
                 ],
+                'required' => false,
+                'empty_data' => 'ROLE_USER',
             ])
             ->add('password', RepeatedType::class,[
                 'type'=> PasswordType::class,
+                'constraints' => [
+                    new Length([
+                        'min' => 6,
+                        'minMessage' => "Mot de passe trop court."
+                    ]),
+                    new Regex([
+                        'pattern' => '/\d/',
+                        'message' => "Votre mot de passe doit contenir au moins un chiffre."
+                    ])
+                ],
                 'invalid_message'=> 'Les mots de passe doivent être identiques',
                 'options'=> ['attr'=>['class'=>'password-field']],
                 'required'=> true,
@@ -41,7 +56,7 @@ class InscriptionType extends AbstractType
                 'second_options'=> ['label'=> 'Confirmation du Mot de passe'],
                 'mapped' => false,
             ])
-            ->add('Valider', SubmitType::class)
+            ->add('valider', SubmitType::class)
         ;
     }
 

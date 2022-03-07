@@ -32,7 +32,7 @@
   width: 350em;
   height: 300em;
   display: inline-block;
-  margin: -50px 330px 50px 330px;
+  margin: -50px 370px 50px 370px;
   /*margin: 0 auto;*/
   border: 2px solid black;
   border-radius: 12px;
@@ -52,37 +52,25 @@
 {% block contenu %}
 </header>
 
-{% for e in app.user.Contacts %}
-
 <div class="container" id="main-container">
   <div class="container" id="user-container">
-    <a style="color: rgb(0,0,255,1);"> {{app.user.IdUnique}} </a>  >>>  <a style="color: rgb(255,0,0,1);"> {{e.Util2.idUnique}} </a>
+    <a style="color: rgb(0,0,255,1);"> {{app.user.IdUnique}} </a>  >>>  <a style="color: rgb(255,0,0,1);"> Administrateur </a>
   </div>
   <div class="container" id="messages-container">
 
-  {% if e.Util1 == app.user %}
+  {% for e in contacts %}
   
-    <div class="container" {% if e.vu == 0 %} style="background-color: rgb(255,0,0,0.4);" {% endif %}>
-      {{app.user.idUnique}}
-      <br>
-      <p>{{e.message}}</p>
-      <span class="time-right" style="color: rgb(0,0,0,1);">{{e.dateMessage|date("g:i")}}</span>
-    </div>
-  {% elseif e.Util2 == app.user %}
-  
-    <div class="container darker" {% if e.vu == 0 %} style="background-color: rgb(255,0,0,0.4);" {% endif %}>
-      {{e.Util2.idUnique}}
+    <div class="container darker" {% if e.vu == 0 and e.emetteur != app.user %} style="background-color: rgb(255,0,0,0.4);" {% endif %}>
+      {{e.emetteur.idUnique}}
       <br>
       <p>{{e.message}}</p>
       <span class="time-right" style="color: rgb(0,0,0,1);">{{e.dateMessage|date("g:i")}}</span>
     </div>
 
-  {% endif %}
+  {% endfor %}
   
   </div>
 </div>
-
-{% endfor %}
 
 
 {% endblock %}

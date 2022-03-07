@@ -57,15 +57,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $idUnique;
 
     /**
-     * @ORM\OneToMany(targetEntity=Contact::class, mappedBy="Util1")
+     * @ORM\OneToMany(targetEntity=Contact::class, mappedBy="emetteur", orphanRemoval=true)
      */
-    private $contacts;
+    private $contactEmetteur;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Contact::class, mappedBy="recepteur", orphanRemoval=true)
+     */
+    private $contactRecepteur;
    
     public function __construct()
     {
         $this->atribuers = new ArrayCollection();
-        $this->contacts = new ArrayCollection();
+        $this->contactEmetteur = new ArrayCollection();
+        $this->contactRecepteur = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -214,31 +219,60 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection|Contact[]
      */
-    public function getContacts(): Collection
+    public function getContactEmetteur(): Collection
     {
-        return $this->contacts;
+        return $this->contactEmetteur;
     }
 
-    public function addContact(Contact $contact): self
+    public function addContactEmetteur(Contact $contactEmetteur): self
     {
-        if (!$this->contacts->contains($contact)) {
-            $this->contacts[] = $contact;
-            $contact->setUtil1($this);
+        if (!$this->contactEmetteur->contains($contactEmetteur)) {
+            $this->contactEmetteur[] = $contactEmetteur;
+            $contactEmetteur->setEmetteur($this);
         }
 
         return $this;
     }
 
-    public function removeContact(Contact $contact): self
+    public function removeContactEmetteur(Contact $contactEmetteur): self
     {
-        if ($this->contacts->removeElement($contact)) {
+        if ($this->contactEmetteur->removeElement($contactEmetteur)) {
             // set the owning side to null (unless already changed)
-            if ($contact->getUtil1() === $this) {
-                $contact->setUtil1(null);
+            if ($contactEmetteur->getEmetteur() === $this) {
+                $contactEmetteur->setEmetteur(null);
             }
         }
 
         return $this;
     }
-  
+
+    /**
+     * @return Collection|Contact[]
+     */
+    public function getContactRecepteur(): Collection
+    {
+        return $this->contactRecepteur;
+    }
+
+    public function addContactRecepteur(Contact $contactRecepteur): self
+    {
+        if (!$this->contactRecepteur->contains($contactRecepteur)) {
+            $this->contactRecepteur[] = $contactRecepteur;
+            $contactRecepteur->setRecepteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContactRecepteur(Contact $contactRecepteur): self
+    {
+        if ($this->contactRecepteur->removeElement($contactRecepteur)) {
+            // set the owning side to null (unless already changed)
+            if ($contactRecepteur->getRecepteur() === $this) {
+                $contactRecepteur->setRecepteur(null);
+            }
+        }
+
+        return $this;
+    }
 }
