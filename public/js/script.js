@@ -1,9 +1,14 @@
 $(document).ready(function () {
     var sel = document.getElementById('sel');
     var selD = document.getElementById('selD');
+    var bt = document.getElementById('bt');
+    var resultat = [];
 
+
+    bt.addEventListener("click", btEnvoyer, false);
     sel.addEventListener("change", selChange, false);
     selD.addEventListener("change", selDChange, false);
+
     function selChange(){
         $("#selD").empty();
         $("#selV").empty();
@@ -18,8 +23,32 @@ $(document).ready(function () {
         }
     }
 
-    function cpt() {
+attribuer();
+    function attribuer() {
         // configuration
+        var request = $.ajax({
+            url: 'http://s3-4391.nuage-peda.fr/mesCompetence/api/atribuers', method: "GET", 
+            dataType: "json",
+            beforeSend: function (xhr) {
+                xhr.overrideMimeType("application/json; charset=utf-8"); 
+            }
+        }); 
+        
+        request.done(function (attribu) {
+            $.each(attribu, function (index, e) {
+                console.log(e.user);
+            });
+           
+        }); 
+        // Fonction qui se lance lorsque l’accès au web service provoque une erreur         
+        request.fail(function (jqXHR, textStatus) {
+            alert('erreur');
+        });
+    }   
+
+
+//case a cocher
+    function cpt() {
         var request = $.ajax({
             url: 'http://s3-4391.nuage-peda.fr/mesCompetence/api/type_competences/'+selD.value, method: "GET", 
             dataType: "json",
@@ -28,12 +57,12 @@ $(document).ready(function () {
             }
         }); 
         
-        request.done(function (vil) {
+        request.done(function (cpt) {
             
-            $.each(vil.competences, function (index, e) {
+            $.each(cpt.competences, function (index, e) {
                 var label = document.createElement("label");
                 selV.appendChild(label);
-                label.innerHTML =  '<input type="checkbox"> <span style="color:white">'+e.libelle +'</span> </br>';
+                label.innerHTML =  '<input class="c" name="cpt" id='+e.id+' type="checkbox" style="color:white"> '+e.libelle +' </br>';  
             });
         }); 
         // Fonction qui se lance lorsque l’accès au web service provoque une erreur         
@@ -42,7 +71,7 @@ $(document).ready(function () {
         });
     }
 
-
+//select type competence
     function typecpt() {
         // configuration
         var request = $.ajax({
@@ -52,13 +81,13 @@ $(document).ready(function () {
                 xhr.overrideMimeType("application/json; charset=utf-8"); 
             }
         }); 
-        request.done(function (dep) {
+        request.done(function (cpt) {
             var option = document.createElement("option");
                 selD.appendChild(option);
                 option.innerText = "Sélectionnez une type de competence";
                 option.value = 0;
                 
-            $.each(dep.typeCompetences, function (index, e) {
+            $.each(cpt.typeCompetences, function (index, e) {
                     var option = document.createElement("option");
                     selD.appendChild(option);
                     option.innerText = e.libelle;
@@ -72,7 +101,7 @@ $(document).ready(function () {
         });
     }
 
-
+//select matiere
     function ajax() {
         // configuration
         var request = $.ajax({
@@ -83,15 +112,15 @@ $(document).ready(function () {
             }
         }); 
         
-        request.done(function (reg) {
-            reg.sort(function(a,b){
+        request.done(function (cp) {
+            cp.sort(function(a,b){
                 if(a.libelle < b.libelle){
                     return -1;
                 } else {
                     return 1;
                 }
             });
-            $.each(reg, function (index, e) {
+            $.each(cp, function (index, e) {
                 var option = document.createElement("option");
                 sel.appendChild(option);
                 option.innerText =  e.libelle;
@@ -105,4 +134,50 @@ $(document).ready(function () {
         });
     }    // Appel de la fonction ajax    
     ajax();
+
+//boucle = nb de checkbox verifie si c'est cocher si oui ajoute dans tab qui ajoute dans bd
+    function btEnvoyer(){
+       var cases = document.getElementsByName('cpt');
+       
+        for (var i = 0; i < cases.length; i++) {
+            if (cases[i].checked) {
+              resultat.push(cases[i].id );
+              auth();
+              resultat.pop();
+            }
+        }
+        
+    }
+  //envoie dans BD
+      function auth() {
+        var request = $.ajax({
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          url: "http://s3-4391.nuage-peda.fr/mesCompetence/api/atribuers",
+          method: "POST",
+          data: JSON.stringify({
+            user: '/mesCompetence/api/users/'+$('#idtoi').text(),
+            competence: '/mesCompetence/api/competences/'+resultat,
+    
+          }),
+          dataType: "json",
+          beforeSend: function (xhr) {
+            xhr.overrideMimeType("application/json; charset=utf-8");
+          }
+        });
+    
+        request.done(function (msg) {
+          console.log("reussi");
+          $('#reussi').text("Ajout reussi")
+          //localStorage.setItem('token', msg.token);
+        });
+        request.fail(function (jqXHR, textStatus, error) {
+          console.log(error);
+          $('#reussi').text(error)
+        });
+    
+      }
+
 });

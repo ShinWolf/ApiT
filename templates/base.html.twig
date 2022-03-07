@@ -26,12 +26,19 @@
 
 	<body>
 		<nav id="navMenu">
-			
+		
 			<a class="navItem" href="{{path("index")}}">Accueil</a>
+			{% if not is_granted('IS_AUTHENTICATED_FULLY') %}
 			<a class="navItem" href="{{path("inscription")}}">Inscription</a>
 			<a class="navItem" href="{{path("app_login")}}">Connexion</a>
+			{% else %}
+			{% if app.user %}
+               <a class="navItem" href="#">{{ app.user.username }}</a>
+			{% endif %}
+			<a class="navItem" href="{{ path('app_logout') }}">Déconnexion</a>
 			<a class="navItem" href="{{path("contact")}}">Contact</a>
 			<a class="navItem" href="{{path("ajoutCompetence")}}">Ajout competence</a>
+			{% endif %}
 			<a class="navItem" href="{{path("mentionslegales")}}">Mentions légales</a>
 			
 		</nav>				
