@@ -15,16 +15,12 @@
             {{ form_widget(form.email, {'attr':{'class':'form-control', 'placeholder':'Votre email'}}) }}
         </div>
 
-        {% if is_granted('ROLE_ADMIN') %}
-
             <div class="col">
                 {{ form_label(form.roles, 'Rôles :', {'label_attr': {'class': 'fw-bold'}}) }}
                 <br>
                 {{ form_widget(form.roles) }}
             </div>
         
-        {% endif %}
-
         <div class="col">
             {{ form_label(form.password.first, 'Mot de passe :', {'label_attr': {'class': 'fw-bold'}}) }}
             <br>
