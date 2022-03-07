@@ -29,7 +29,7 @@ console.log(listeCpt)
     function attribuer() {
         // configuration
         var request = $.ajax({
-            url: 'http://s3-4391.nuage-peda.fr/mesCompetence/api/atribuers', method: "GET", 
+            url: 'http://s3-4381.nuage-peda.fr/mescompetences/api/atribuers', method: "GET", 
             dataType: "json",
             beforeSend: function (xhr) {
                 xhr.overrideMimeType("application/json; charset=utf-8"); 
@@ -56,7 +56,7 @@ console.log(listeCpt)
 //case a cocher
     function cpt() {
         var request = $.ajax({
-            url: 'http://s3-4391.nuage-peda.fr/mesCompetence/api/type_competences/'+selD.value, method: "GET", 
+            url: 'http://s3-4381.nuage-peda.fr/mescompetences/api/type_competences/'+selD.value, method: "GET", 
             dataType: "json",
             beforeSend: function (xhr) {
                 xhr.overrideMimeType("application/json; charset=utf-8"); 
@@ -81,7 +81,7 @@ console.log(listeCpt)
     function typecpt() {
         // configuration
         var request = $.ajax({
-            url: 'http://s3-4391.nuage-peda.fr/mesCompetence/api/matieres/'+sel.value, method: "GET", 
+            url: 'http://s3-4381.nuage-peda.fr/mescompetences/api/matieres/'+sel.value, method: "GET", 
             dataType: "json",
             beforeSend: function (xhr) {
                 xhr.overrideMimeType("application/json; charset=utf-8"); 
@@ -111,7 +111,7 @@ console.log(listeCpt)
     function ajax() {
         // configuration
         var request = $.ajax({
-            url: "http://s3-4391.nuage-peda.fr/mesCompetence/api/matieres", method: "GET", 
+            url: "http://s3-4381.nuage-peda.fr/mescompetences/api/matieres", method: "GET", 
             dataType: "json",
             beforeSend: function (xhr) {
                 xhr.overrideMimeType("application/json; charset=utf-8"); 
@@ -182,11 +182,11 @@ console.log(listeCpt)
             'Accept': 'application/json',
             'Content-Type': 'application/json'
           },
-          url: "http://s3-4391.nuage-peda.fr/mesCompetence/api/atribuers",
+          url: "http://s3-4381.nuage-peda.fr/mescompetences/api/atribuers",
           method: "POST",
           data: JSON.stringify({
-            user: '/mesCompetence/api/users/'+userid,
-            competence: '/mesCompetence/api/competences/'+resultat,
+            user: '/mescompetences/api/users/'+userid,
+            competence: '/mescompetences/api/competences/'+resultat,
     
           }),
           dataType: "json",
