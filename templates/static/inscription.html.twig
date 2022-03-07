@@ -9,26 +9,31 @@
 
     <div class="container">
 
-        <div class="my-custom-class-for-errors">
-            {{ form_errors(form) }}
-        </div>
-
         <div class="col">
             {{ form_label(form.email, 'Email :', {'label_attr': {'class': 'fw-bold'}}) }}
             <br>
             {{ form_widget(form.email, {'attr':{'class':'form-control', 'placeholder':'Votre email'}}) }}
         </div>
 
-        <div class="col">
-            {{ form_label(form.roles, 'Rôles :', {'label_attr': {'class': 'fw-bold'}}) }}
-            <br>
-            {{ form_widget(form.roles) }}
-        </div>
+        {% if is_granted('ROLE_ADMIN') %}
+
+            <div class="col">
+                {{ form_label(form.roles, 'Rôles :', {'label_attr': {'class': 'fw-bold'}}) }}
+                <br>
+                {{ form_widget(form.roles) }}
+            </div>
+        
+        {% endif %}
 
         <div class="col">
             {{ form_label(form.password.first, 'Mot de passe :', {'label_attr': {'class': 'fw-bold'}}) }}
             <br>
             {{ form_widget(form.password.first, {'attr':{'class':'form-control', 'placeholder':'Mot de passe'}}) }}
+
+            {% if form_errors(form.password.first) is not empty %}
+                {{ form_errors(form.password.first, {'attr':{'class':'form-control', 'placeholder':'Mot de passe'}}) }}
+            {% endif %}
+            
         </div>
 
         <div class="col">
@@ -40,7 +45,7 @@
         <br>
 
         <div class="col">
-            {{ form_widget(form.Valider, {'label':"Valider", 'attr':{'class':'btn bg-primary'}}) }}
+            {{ form_widget(form.valider, {'label':"Valider", 'attr':{'class':'btn bg-primary'}}) }}
         </div>
 
     </div>

@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ContactRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -20,18 +22,6 @@ class Contact
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="contacts")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $Util1;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="contacts")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $Util2;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $message;
@@ -46,33 +36,25 @@ class Contact
      */
     private $vu;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="contactEmetteur")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $emetteur;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="contactRecepteur")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $recepteur;
+
+    public function __construct()
+    {
+    }
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getUtil1(): ?User
-    {
-        return $this->Util1;
-    }
-
-    public function setUtil1(?User $Util1): self
-    {
-        $this->Util1 = $Util1;
-
-        return $this;
-    }
-
-    public function getUtil2(): ?User
-    {
-        return $this->Util2;
-    }
-
-    public function setUtil2(?User $Util2): self
-    {
-        $this->Util2 = $Util2;
-
-        return $this;
     }
 
     public function getMessage(): ?string
@@ -107,6 +89,30 @@ class Contact
     public function setVu(bool $vu): self
     {
         $this->vu = $vu;
+
+        return $this;
+    }
+
+    public function getEmetteur(): ?User
+    {
+        return $this->emetteur;
+    }
+
+    public function setEmetteur(?User $emetteur): self
+    {
+        $this->emetteur = $emetteur;
+
+        return $this;
+    }
+
+    public function getRecepteur(): ?User
+    {
+        return $this->recepteur;
+    }
+
+    public function setRecepteur(?User $recepteur): self
+    {
+        $this->recepteur = $recepteur;
 
         return $this;
     }
