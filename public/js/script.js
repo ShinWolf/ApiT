@@ -3,7 +3,8 @@ $(document).ready(function () {
     var selD = document.getElementById('selD');
     var bt = document.getElementById('bt');
     var resultat = [];
-
+    var userid = $('#idtoi').text();
+    var listeCpt = [];
 
     bt.addEventListener("click", btEnvoyer, false);
     sel.addEventListener("change", selChange, false);
@@ -24,6 +25,7 @@ $(document).ready(function () {
     }
 
 attribuer();
+console.log(listeCpt)
     function attribuer() {
         // configuration
         var request = $.ajax({
@@ -36,7 +38,11 @@ attribuer();
         
         request.done(function (attribu) {
             $.each(attribu, function (index, e) {
-                console.log(e.user);
+                if(userid == e.user.id ){
+                    listeCpt.push(e.competence.id );
+                    console.log(e.competence)
+                }
+                
             });
            
         }); 
@@ -45,7 +51,7 @@ attribuer();
             alert('erreur');
         });
     }   
-
+    console.log(listeCpt);
 
 //case a cocher
     function cpt() {
@@ -141,12 +147,33 @@ attribuer();
        
         for (var i = 0; i < cases.length; i++) {
             if (cases[i].checked) {
-              resultat.push(cases[i].id );
-              auth();
-              resultat.pop();
+              resultat.unshift(cases[i].id );
+              //verifieTab();
+              if(verifieTab()== true){
+                auth();
+              }
+              else{
+                $('#reussi').text("Competences deja mis")
+              }
+              console.log("avant"+listeCpt);
+                listeCpt.splice(0, listeCpt.length);
+                attribuer();
             }
         }
-        
+        console.log("apres"+listeCpt);
+    }
+
+    function verifieTab(){
+        var bon = false;
+        for (var i = 0; i < listeCpt.length; i++) {
+            if(resultat[0] == listeCpt[i]){
+                i = listeCpt.length;
+                bon = false;
+            }else{
+                bon = true;
+            }
+        }
+    return bon;
     }
   //envoie dans BD
       function auth() {
@@ -158,7 +185,7 @@ attribuer();
           url: "http://s3-4391.nuage-peda.fr/mesCompetence/api/atribuers",
           method: "POST",
           data: JSON.stringify({
-            user: '/mesCompetence/api/users/'+$('#idtoi').text(),
+            user: '/mesCompetence/api/users/'+userid,
             competence: '/mesCompetence/api/competences/'+resultat,
     
           }),
