@@ -24,8 +24,6 @@ $(document).ready(function () {
         }
     }
 
-attribuer();
-console.log(listeCpt)
     function attribuer() {
         // configuration
         var request = $.ajax({
@@ -40,7 +38,6 @@ console.log(listeCpt)
             $.each(attribu, function (index, e) {
                 if(userid == e.user.id ){
                     listeCpt.push(e.competence.id );
-                    console.log(e.competence)
                 }
                 
             });
@@ -144,35 +141,39 @@ console.log(listeCpt)
 //boucle = nb de checkbox verifie si c'est cocher si oui ajoute dans tab qui ajoute dans bd
     function btEnvoyer(){
        var cases = document.getElementsByName('cpt');
-       
+        //listeCpt.splice(0, listeCpt.length);
+        attribuer()
         for (var i = 0; i < cases.length; i++) {
             if (cases[i].checked) {
               resultat.unshift(cases[i].id );
-              //verifieTab();
+              console.log(resultat)
               if(verifieTab()== true){
                 auth();
               }
               else{
+                console.log("liste"+listeCpt)
                 $('#reussi').text("Competences deja mis")
               }
-              console.log("avant"+listeCpt);
-                listeCpt.splice(0, listeCpt.length);
-                attribuer();
             }
         }
-        console.log("apres"+listeCpt);
+        
     }
 
     function verifieTab(){
         var bon = false;
+        if(listeCpt.length == 0){
+            bon = true;
+        }else{
         for (var i = 0; i < listeCpt.length; i++) {
             if(resultat[0] == listeCpt[i]){
                 i = listeCpt.length;
                 bon = false;
-            }else{
+            }
+            else{
                 bon = true;
             }
         }
+    }
     return bon;
     }
   //envoie dans BD
