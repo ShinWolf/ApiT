@@ -3,7 +3,9 @@ $(document).ready(function () {
     var selD = document.getElementById('selD');
     var bt = document.getElementById('bt');
     var resultat = [];
-
+    var userid = $('#idtoi').text();
+    var listeCpt = [];
+    var lien = "http://s3-4391.nuage-peda.fr/mesCompetence/api/";
 
     bt.addEventListener("click", btEnvoyer, false);
     sel.addEventListener("change", selChange, false);
@@ -22,12 +24,11 @@ $(document).ready(function () {
             cpt();
         }
     }
-
-attribuer();
+    
     function attribuer() {
         // configuration
         var request = $.ajax({
-            url: 'http://s3-4391.nuage-peda.fr/mesCompetence/api/atribuers', method: "GET", 
+            url: lien+'atribuers', method: "GET", 
             dataType: "json",
             beforeSend: function (xhr) {
                 xhr.overrideMimeType("application/json; charset=utf-8"); 
@@ -36,21 +37,22 @@ attribuer();
         
         request.done(function (attribu) {
             $.each(attribu, function (index, e) {
-                console.log(e.user);
+                if(userid == e.user.id ){
+                    listeCpt.push(e.competence.id );
+                }
             });
-           
         }); 
         // Fonction qui se lance lorsque l’accès au web service provoque une erreur         
         request.fail(function (jqXHR, textStatus) {
             alert('erreur');
         });
     }   
-
+    console.log(listeCpt);
 
 //case a cocher
     function cpt() {
         var request = $.ajax({
-            url: 'http://s3-4391.nuage-peda.fr/mesCompetence/api/type_competences/'+selD.value, method: "GET", 
+            url: lien+'type_competences/'+selD.value, method: "GET", 
             dataType: "json",
             beforeSend: function (xhr) {
                 xhr.overrideMimeType("application/json; charset=utf-8"); 
@@ -75,7 +77,7 @@ attribuer();
     function typecpt() {
         // configuration
         var request = $.ajax({
-            url: 'http://s3-4391.nuage-peda.fr/mesCompetence/api/matieres/'+sel.value, method: "GET", 
+            url: lien+'matieres/'+sel.value, method: "GET", 
             dataType: "json",
             beforeSend: function (xhr) {
                 xhr.overrideMimeType("application/json; charset=utf-8"); 
@@ -105,7 +107,7 @@ attribuer();
     function ajax() {
         // configuration
         var request = $.ajax({
-            url: "http://s3-4391.nuage-peda.fr/mesCompetence/api/matieres", method: "GET", 
+            url: lien+"matieres", method: "GET", 
             dataType: "json",
             beforeSend: function (xhr) {
                 xhr.overrideMimeType("application/json; charset=utf-8"); 
@@ -136,17 +138,46 @@ attribuer();
     ajax();
 
 //boucle = nb de checkbox verifie si c'est cocher si oui ajoute dans tab qui ajoute dans bd
-    function btEnvoyer(){
+   function btEnvoyer(){
        var cases = document.getElementsByName('cpt');
-       
+        //listeCpt.splice(0, listeCpt.length);
+        
         for (var i = 0; i < cases.length; i++) {
             if (cases[i].checked) {
-              resultat.push(cases[i].id );
-              auth();
-              resultat.pop();
+              resultat.unshift(cases[i].id );
+              if(verifieTab()== true){
+                auth();
+                cases[i].checked = false;
+              }
+              else{
+                cases[i].checked = false;
+                $('#reussi').text("Competences deja mis")
+              }
             }
         }
         
+        listeCpt.splice(0, listeCpt.length);
+        
+    }
+//verifie si la personne a au moins 1 competence 
+//si elle a un cpt alor on verifie si il a deja cette competence
+    function verifieTab(){
+        attribuer();
+        var bon = false;
+        if(listeCpt.length == 0){
+            bon = true;
+        }else{
+        for (var i = 0; i < listeCpt.length; i++) {
+            if(resultat[0] == listeCpt[i]){
+                i = listeCpt.length;
+                bon = false;
+            }
+            else{
+                bon = true;
+            }
+        }
+    }
+    return bon;
     }
   //envoie dans BD
       function auth() {
@@ -155,10 +186,10 @@ attribuer();
             'Accept': 'application/json',
             'Content-Type': 'application/json'
           },
-          url: "http://s3-4391.nuage-peda.fr/mesCompetence/api/atribuers",
+          url: lien+"atribuers",
           method: "POST",
           data: JSON.stringify({
-            user: '/mesCompetence/api/users/'+$('#idtoi').text(),
+            user: '/mesCompetence/api/users/'+userid,
             competence: '/mesCompetence/api/competences/'+resultat,
     
           }),

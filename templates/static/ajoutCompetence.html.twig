@@ -8,7 +8,8 @@
 </header>
 
 {% if app.user %}
-    <label>Votre id <label id="idtoi">{{ app.user.id }}</label></label>
+<label hidden="hidden" id="idtoi">{{ app.user.id }}</label>
+    <label>Votre id {{ app.user.idUnique }}</label>
 {% endif %}
     <h5 style="color:red" id="reussi"></h5>
  <select name="sel" id="sel">
