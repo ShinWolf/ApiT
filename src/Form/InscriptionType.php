@@ -35,7 +35,7 @@ class InscriptionType extends AbstractType
                     ],
                 ],
                 'required' => false,
-                'empty_data' => 'ROLE_USER',
+                'empty_data' => '["ROLE_USER"]',
             ])
             ->add('password', RepeatedType::class,[
                 'type'=> PasswordType::class,
