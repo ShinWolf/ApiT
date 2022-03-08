@@ -35,6 +35,8 @@ class StaticController extends AbstractController
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()){
 
+                // Prend les données du formulaire et les envoie
+                // Met la date d'inscription avec la date d'envoi, et crée un ID unique avec comme préfix "MCP_"
                 $utilisateur->setEmail($form->get('email')->getData());
                 $utilisateur->setPassword($passwordHasher->hashPassword($utilisateur,$form->get('password')->getData()));
                 $utilisateur->setRoles($form->get('roles')->getData());
@@ -44,20 +46,22 @@ class StaticController extends AbstractController
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($utilisateur);
                 $em->flush();
-
-                //return $this->redirectToRoute('accueil');
             }
         }
-        return $this->render('static/inscription.html.twig', ['form'=>$form->createView()]);
+        return $this->render('static/inscription.html.twig', [
+            'form'=>$form->createView()
+        ]);
     }
 
      #[Route('/ajoutCompetence', name: 'ajoutCompetence')]
      public function ajoutCompetence(): Response
      {
         $form = $this->createForm(AjoutCompetenceType::class);
-         return $this->render('static/ajoutCompetence.html.twig', [
-            'form'=>$form->createView()]);
-         }
+
+        return $this->render('static/ajoutCompetence.html.twig', [
+            'form'=>$form->createView()
+        ]);
+    }
 
     /**
      * @Route("/login", name="app_login")
@@ -68,12 +72,14 @@ class StaticController extends AbstractController
         //     return $this->redirectToRoute('target_path');
         // }
 
-        // get the login error if there is one
+        // Récupère l'erreur de login
         $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
+        // Récupère le dernier nom d'utilisateur entré par l'utilisateur
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+        return $this->render('security/login.html.twig', [
+            'last_username' => $lastUsername, 'error' => $error
+        ]);
     }
 
     /**
@@ -104,8 +110,6 @@ class StaticController extends AbstractController
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($contact);
                 $em->flush();
-
-                //return $this->redirectToRoute('contact');
             }
         }
         return $this->render('static/contact.html.twig', [
@@ -118,8 +122,6 @@ class StaticController extends AbstractController
     #[Route('/mentionslegales', name: 'mentionslegales')]
     public function mentionslegales(): Response
     {
-        return $this->render('static/mentionslegales.html.twig', [
-        ]);
-         
+        return $this->render('static/mentionslegales.html.twig', []);
     }
 }

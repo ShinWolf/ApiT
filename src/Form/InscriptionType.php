@@ -37,6 +37,8 @@ class InscriptionType extends AbstractType
                 'required' => false,
                 'empty_data' => '["ROLE_USER"]',
             ])
+            // Contraintes du mot de passe
+            // Minimum 6 caractères (Length), et contient au minimum un chiffre (Regex)
             ->add('password', RepeatedType::class,[
                 'type'=> PasswordType::class,
                 'constraints' => [
@@ -53,7 +55,7 @@ class InscriptionType extends AbstractType
                 'options'=> ['attr'=>['class'=>'password-field']],
                 'required'=> true,
                 'first_options'=> ['label'=> 'Mot de passe'],
-                'second_options'=> ['label'=> 'Confirmation du Mot de passe'],
+                'second_options'=> ['label'=> 'Confirmation du mot de passe'],
                 'mapped' => false,
             ])
             ->add('valider', SubmitType::class)

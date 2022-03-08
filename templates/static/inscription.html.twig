@@ -16,13 +16,12 @@
         </div>
 
         <!--
-            Si l'utilisateur connecté a le rôle d'administrateur, montrer la modification de rôle pour l'utilisateur crée.
-            Sinon, l'utilisateur sera automatiquement donné le rôle d'utilisateur grâce à l'entité User.
+            Si l'utilisateur connecté a le rôle d'administrateur, montrer la modification de rôles pour l'utilisateur crée.
+            Sinon, cacher la séléction de rôles et l'utilisateur sera automatiquement donné le rôle d'utilisateur grâce à l'entité User.
         -->
-
         {% if is_granted('ROLE_ADMIN') %}
 
-            <div class="col" style="display: none;">
+            <div class="col">
                 {{ form_label(form.roles, 'Rôles :', {'label_attr': {'class': 'fw-bold'}}) }}
                 <br>
                 {{ form_widget(form.roles) }}

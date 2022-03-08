@@ -19,7 +19,7 @@ class AuthenticationSuccessListener{
         return;
     }
 
-    // Récupéré par l'utilisateur à sa connexion
+    // Données récupérées par l'utilisateur à sa connexion
     $data['data'] = array(
         'email' => $user->getEmail(),
         'roles' => $user->getRoles(),
