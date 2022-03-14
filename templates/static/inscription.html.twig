@@ -15,11 +15,27 @@
             {{ form_widget(form.email, {'attr':{'class':'form-control', 'placeholder':'Votre email'}}) }}
         </div>
 
+        <!--
+            Si l'utilisateur connecté a le rôle d'administrateur, montrer la modification de rôles pour l'utilisateur crée.
+            Sinon, cacher la séléction de rôles et l'utilisateur sera automatiquement donné le rôle d'utilisateur grâce à l'entité User.
+        -->
+        {% if is_granted('ROLE_ADMIN') %}
+
             <div class="col">
                 {{ form_label(form.roles, 'Rôles :', {'label_attr': {'class': 'fw-bold'}}) }}
                 <br>
                 {{ form_widget(form.roles) }}
             </div>
+
+        {% else %}
+
+            <div class="col" style="display: none;">
+                {{ form_label(form.roles, 'Rôles :', {'label_attr': {'class': 'fw-bold', 'style': 'display:none;' }}) }}
+                <br>
+                {{ form_widget(form.roles, {'label_attr': {'style': 'display:none;' }}) }}
+            </div>
+
+        {% endif %}
         
         <div class="col">
             {{ form_label(form.password.first, 'Mot de passe :', {'label_attr': {'class': 'fw-bold'}}) }}

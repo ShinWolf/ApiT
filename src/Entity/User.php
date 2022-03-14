@@ -13,7 +13,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
-#[ApiResource(normalizationContext:['groups' => ['read']], itemOperations: ["get", "patch"=>["security"=>"is_granted('ROLE_ADMIN') or object == user"]])]
+#[ApiResource(normalizationContext:['groups' => ['read']], itemOperations: ["get"=>["security"=>"is_granted('ROLE_ADMIN') or object == user"], "patch"=>["security"=>"is_granted('ROLE_ADMIN') or object == user"]], collectionOperations: ["get"=>["security"=>"is_granted('ROLE_ADMIN')"]])]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
@@ -27,11 +27,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      */
+    #[Groups(["read"])]
     private $email;
 
     /**
      * @ORM\Column(type="json")
      */
+    #[Groups(["read"])]
     private $roles = [];
 
     /**
@@ -48,6 +50,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="datetime")
      */
+    #[Groups(["read"])]
     private $dateInscription;
 
     /**
@@ -114,8 +117,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        
+        // Si aucun rôle n'est spécifié, mettre le rôle d'utilisateur
+        if (empty($roles))
+        {
+            $roles[] = 'ROLE_USER';
+        }
 
         return array_unique($roles);
     }
