@@ -105,7 +105,8 @@ class StaticController extends AbstractController
         $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->render('security/login.html.twig', [
-            'last_username' => $lastUsername, 'error' => $error
+            'last_username' => $lastUsername,
+            'error' => $error
         ]);
     }
 
@@ -131,12 +132,14 @@ class StaticController extends AbstractController
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()){
 
-                $contact->setMessage($form->get('message')->getData());
                 $contact->setDateMessage(new \DateTime());
+                $contact->setVu(1);
 
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($contact);
                 $em->flush();
+
+                return $this->redirectToRoute('contact');
             }
         }
         return $this->render('static/contact.html.twig', [

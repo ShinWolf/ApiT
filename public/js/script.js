@@ -5,7 +5,7 @@ $(document).ready(function () {
     var resultat = [];
     var userid = $('#idtoi').text();
     var listeCpt = [];
-    var lien = "http://s3-4391.nuage-peda.fr/mesCompetence/api/";
+    var lien = "http://s3-4381.nuage-peda.fr/mescompetences/api/";
 
     bt.addEventListener("click", btEnvoyer, false);
     sel.addEventListener("change", selChange, false);
@@ -188,8 +188,13 @@ $(document).ready(function () {
             url: lien + "atribuers",
             method: "POST",
             data: JSON.stringify({
+<<<<<<< HEAD
+                user: '/mescompetences/api/users/' + userid,
+                competence: '/mescompetences/api/competences/' + resultat,
+=======
                 user: '/mesCompetence/api/users/' + userid,
                 competence: '/mesCompetence/api/competences/' + resultat,
+>>>>>>> 2927e53de67cb6504885607670a5d6bca3f99b74
 
             }),
             dataType: "json",

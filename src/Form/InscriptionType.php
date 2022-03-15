@@ -17,7 +17,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Regex;
-
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 class InscriptionType extends AbstractType
 {
