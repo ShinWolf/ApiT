@@ -19,7 +19,7 @@
 	<tbody>
 		{% for atribuer in atribuers %}
 			<tr>
-				<td><a style="color: black" href="{{ atribuer.user.idUnique }}">{{ atribuer.user.idUnique | capitalize }}</td>
+				<td><a style="color: black" href="{{path('profil', {'id':atribuer.user.id})}}">{{ atribuer.user.idUnique | capitalize }}</td>
 			</tr>
 		{% endfor %}
 	</tbody>

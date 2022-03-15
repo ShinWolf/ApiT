@@ -1,44 +1,40 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Profil{% endblock %}
+{% block title %}Profil
+{% endblock %}
 
 {% block contenu %}
-{% if app.user %}
-    <h1>{{ app.user.idUnique }}</h1>
-{% endif %}
+
 </header>
-
 <div class="container-fluid">
-		<span>Liste des compétences</span>
+	<span>Liste des compétences</span>
+	<div class="row justify-content-center">
+		<div class="col-12 col-md-8 p-4 m-0 text-primary">
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
 
-
-		<div class="row justify-content-center">
-			<div class="col-12 col-md-8 p-4 m-0 text-primary">
-				<div class="table-responsive">
-					<table class="table table-hover">
-						<thead>
-							<tr class="fw-bold text-primary">
-								<th scope="col">compétence</th>
-                                <th scope="col">valider</th>
+						<tr class="fw-bold text-primary">
+							<th scope="col">compétence</th>
+							<th scope="col">valider</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for atribuer in atribuers %}
+							<tr>
+								<td>{{ atribuer.competence.libelle | capitalize }}</td>
+								<td>{{ atribuer.nbValider | capitalize }}</td>
 							</tr>
-						</thead>
-						<tbody>
-							{% for atribuer in atribuers %}
-								<tr>
-									<td>{{ atribuer.competence.libelle | capitalize }}</td>
-									<td>{{ atribuer.nbValider | capitalize }}</td>
-								</tr>
-							{% endfor %}
-						</tbody>
-					</table>
-				</div>
+						{% endfor %}
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
+</div>
 <label>Double click sur une compétence pour la valider</label>
 
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-<script src="js/profil.js"> </script>
-{% endblock %}
+<script src="js/profil.js"></script>{% endblock %}
