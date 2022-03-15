@@ -13,6 +13,10 @@
             {{ form_label(form.email, 'Email :', {'label_attr': {'class': 'fw-bold'}}) }}
             <br>
             {{ form_widget(form.email, {'attr':{'class':'form-control', 'placeholder':'Votre email'}}) }}
+
+            {% if form_errors(form.email) is not empty %}
+                {{ form_errors(form.email, {'attr':{'class':'form-control', 'placeholder':'Email'}}) }}
+            {% endif %}
         </div>
 
         <!--
