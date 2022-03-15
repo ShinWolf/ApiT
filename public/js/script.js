@@ -5,7 +5,7 @@ $(document).ready(function () {
     var resultat = [];
     var userid = $('#idtoi').text();
     var listeCpt = [];
-    var lien = "http://s3-4381.nuage-peda.fr/mescompetences/api/";
+    var lien = "http://s3-4391.nuage-peda.fr/mesCompetence/api/";
 
     bt.addEventListener("click", btEnvoyer, false);
     sel.addEventListener("change", selChange, false);

@@ -80,4 +80,11 @@ class Atribuer
 
         return $this;
     }
+
+    public function getRow(){               
+        return array($this->id, $this->nbValider, $this->competence->getLibelle(), $this->user->getId());    
+    }    
+    public function getHeader(){        
+        return array('Identifiant', 'NbValider', 'Competence', 'User');    
+    }
 }
