@@ -37,7 +37,7 @@ class AtribuerRepository extends ServiceEntityRepository
     public function atribuersByUser($user)    
     {        
         return $this->createQueryBuilder('a')            
-        ->andWhere('user.id = :user')            
+        ->andWhere('user.idUnique = :user')            
         ->leftJoin('a.user', 'user', 'WITH', )            
         ->setParameter('user', $user)            
         ->orderBy('a.id', 'ASC')            

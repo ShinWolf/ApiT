@@ -188,8 +188,8 @@ $(document).ready(function () {
             url: lien + "atribuers",
             method: "POST",
             data: JSON.stringify({
-                user: '/mescompetences/api/users/' + userid,
-                competence: '/mescompetences/api/competences/' + resultat,
+                user: '/mesCompetence/api/users/' + userid,
+                competence: '/mesCompetence/api/competences/' + resultat,
 
             }),
             dataType: "json",

@@ -52,7 +52,7 @@ class QueryBuilderCommand extends Command
             case 2 : $output->writeln("Liste des atribuers");  
                 /** @var \App\Repository\AtribuerRepository */                                
                 $repo   =   $this->entityManager->getRepository(Atribuer::class);
-                $result = $repo->atribuersByUser(5);                 
+                $result = $repo->atribuersByUser('MCP_6220732a6987e');                 
             break; 
             case 3 : $output->writeln("Liste des atribuers");  
                 /** @var \App\Repository\AtribuerRepository */                                
