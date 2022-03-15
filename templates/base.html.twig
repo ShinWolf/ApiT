@@ -9,32 +9,32 @@
 		<!-- Generic -->
 		<meta charset="UTF-8"/>
 
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		
+		<meta
+		name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 		<link rel="stylesheet" href="css/style.css"/>
 		<title>
-			{% block title %}
-			{% endblock %}
+			{% block title %}{% endblock %}
 			- Mes Compétences
 		</title>
-		{% block style %}
-		{% endblock %}
+		{% block style %}{% endblock %}
 		<script src="js/jquery.min.js"></script>
 	</head>
 
 	<body>
 		<nav id="navMenu">
-		
+			
 			<a class="navItem" href="{{path("index")}}">Accueil</a>
 			{% if not is_granted('IS_AUTHENTICATED_FULLY') %}
-			<a class="navItem" href="{{path("inscription")}}">Inscription</a>
-			<a class="navItem" href="{{path("app_login")}}">Connexion</a>
+				<a class="navItem" href="{{path("inscription")}}">Inscription</a>
+				<a class="navItem" href="{{path("app_login")}}">Connexion</a>
 			{% else %}
 			{% if app.user %}
+				<a class="navItem" href="{{path("resultat")}}">recherche</a>
 				<a class="navItem" href="{{path("inscription")}}">Ajouter un utilisateur</a>
-            	<a class="navItem" href="#">{{ app.user.username }}</a>
+            	<a class="navItem" href="{{path("profil")}}">{{ app.user.username }}</a>
 			{% endif %}
 			<a class="navItem" href="{{ path('app_logout') }}">Déconnexion</a>
 			<a class="navItem" href="{{path("contact")}}">Contact</a>
@@ -42,26 +42,20 @@
 			{% endif %}
 			<a class="navItem" href="{{path("mentionslegales")}}">Mentions légales</a>
 			
-		</nav>				
-		
-			{% block header %}
-					
-			{% endblock %}
+		</nav>
+
+		{% block header %}{% endblock %}
 		<div id="pageContent">
 			<header>
 				<div id="menuButton">
 					Menu
 				</div>
-				<div id="page">
-				{% block contenu %}
-			
-				{% endblock %}
+				<div id="page"> {% block contenu %}{% endblock %}
+					</div>
+
 				</div>
-	
-		</div>
 
-		<script src="js/navMenu.js"></script>
-		
-	</body>
-
-</html>
+				<script src="js/navMenu.js"></script>
+			</body>
+		</body>
+	</html>

@@ -13,6 +13,10 @@ use App\Form\AjoutCompetenceType;
 use App\Form\ContactType;
 use App\Entity\User;
 use App\Entity\Contact;
+use App\Entity\Competence;
+use App\Entity\Atribuer;
+use App\Repository\AtribuerRepository;
+use App\Form\MySearchType;
 
 class StaticController extends AbstractController
 {
@@ -21,6 +25,29 @@ class StaticController extends AbstractController
     {
         return $this->render('static/index.html.twig', [
             'controller_name' => 'StaticController',
+        ]);
+    }
+
+    #[Route('/resultat', name: 'resultat')]
+    public function liste(Request $request, AtribuerRepository $repo): Response
+    {
+        $form = $this->createForm(MySearchType::class);
+        $atribuers = null;
+        if($request->isMethod('POST')){
+            $form->handleRequest($request);
+            if ($form->isSubmitted()&&$form->isValid()){
+                $competence = new Competence();
+                $competence->getlibelle();
+
+                $data = $form->get('recherche')->getData();
+        
+                $atribuers = $repo->atribuersByCompetence($data);
+            }
+        }
+
+        
+        return $this->render('static/liste.html.twig', [
+            'atribuers' => $atribuers, 'form' => $form->createView()
         ]);
     }
 

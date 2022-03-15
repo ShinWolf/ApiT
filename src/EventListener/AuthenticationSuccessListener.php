@@ -14,6 +14,11 @@ class AuthenticationSuccessListener{
   {
     $data = $event->getData();
     $user = $event->getUser();
+    $atribuers = $user->getAtribuers();
+    $comp = array();
+    foreach($atribuers as $a){
+      $comp[] = $a->getCompetence()->getLibelle();
+    }
 
     if (!$user instanceof UserInterface) {
         return;
@@ -24,6 +29,7 @@ class AuthenticationSuccessListener{
         'email' => $user->getEmail(),
         'roles' => $user->getRoles(),
         'idUnique' => $user->getIdUnique(),
+        'competences' => $comp,
     );
 
     $event->setData($data);
