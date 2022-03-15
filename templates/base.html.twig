@@ -25,22 +25,20 @@
 
 	<body>
 		<nav id="navMenu">
-			<form class="d-flex">
-				<input class="form-control me-sm-2" type="text" placeholder="Search">
-				<button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-			</form>
+			
 			<a class="navItem" href="{{path("index")}}">Accueil</a>
 			{% if not is_granted('IS_AUTHENTICATED_FULLY') %}
 				<a class="navItem" href="{{path("inscription")}}">Inscription</a>
 				<a class="navItem" href="{{path("app_login")}}">Connexion</a>
 			{% else %}
-				{% if app.user %}
-					<a class="navItem" href="{{path("inscription")}}">Ajouter un utilisateur</a>
-					<a class="navItem" href="#">{{ app.user.username }}</a>
-				{% endif %}
-				<a class="navItem" href="{{ path('app_logout') }}">Déconnexion</a>
-				<a class="navItem" href="{{path("contact")}}">Contact</a>
-				<a class="navItem" href="{{path("ajoutCompetence")}}">Ajout competence</a>
+			{% if app.user %}
+				<a class="navItem" href="{{path("resultat")}}">recherche</a>
+				<a class="navItem" href="{{path("inscription")}}">Ajouter un utilisateur</a>
+            	<a class="navItem" href="{{path("profil")}}">{{ app.user.username }}</a>
+			{% endif %}
+			<a class="navItem" href="{{ path('app_logout') }}">Déconnexion</a>
+			<a class="navItem" href="{{path("contact")}}">Contact</a>
+			<a class="navItem" href="{{path("ajoutCompetence")}}">Ajout competence</a>
 			{% endif %}
 			<a class="navItem" href="{{path("mentionslegales")}}">Mentions légales</a>
 			
