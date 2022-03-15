@@ -4,14 +4,13 @@
 {% endblock %}
 
 {% block contenu %}
-<h3 style="color: red">Liste des compétences</h3>
-</header>
 
+</header>
+<h2>{{ app.user.idUnique }}</h2>
 <div class="container-fluid">
-	
-	<label style="color: white">Double click sur une compétence pour la valider</label>
+	<span>Liste des compétences</span>
 	<div class="row justify-content-center">
-		<div class="col-12 col-md-12 p-4 m-1 text-primary">
+		<div class="col-20 col-md-20 p-3 m-1 text-primary">
 			<div class="table-responsive">
 				<table class="table table-hover">
 					<thead>
@@ -23,7 +22,7 @@
 					</thead>
 					<tbody>
 						{% for atribuer in atribuers %}
-							<tr class="cpt" id="{{ atribuer.id }}">
+							<tr>
 								<td >{{ atribuer.competence.libelle | capitalize }}</td>
 								<td >{{ atribuer.nbValider | capitalize }}</td>
 							</tr>
@@ -35,8 +34,7 @@
 	</div>
 </div>
 
-
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-<script src="js/valider.js"></script>{% endblock %}
+{% endblock %}
