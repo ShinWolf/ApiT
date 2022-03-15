@@ -19,6 +19,19 @@ class MatiereRepository extends ServiceEntityRepository
         parent::__construct($registry, Matiere::class);
     }
 
+    /**    
+     * @return Matiere[] Returns an array of Matiere objects    
+     */
+
+    public function matieres()    
+    {        
+        return $this->createQueryBuilder('m')             
+        ->orderBy('m.libelle', 'ASC')            
+        ->getQuery()            
+        ->getResult()        
+        ;    
+    }
+
     // /**
     //  * @return Matiere[] Returns an array of Matiere objects
     //  */

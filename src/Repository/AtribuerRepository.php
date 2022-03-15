@@ -19,6 +19,33 @@ class AtribuerRepository extends ServiceEntityRepository
         parent::__construct($registry, Atribuer::class);
     }
 
+    /**      
+     * @return Atribuer[] Returns an array of Atribuer objects    
+     */    
+    public function atribuersByCompetence($competence)    
+    {        
+        return $this->createQueryBuilder('a')            
+        ->andWhere('competence.libelle = :competence')            
+        ->leftJoin('a.competence', 'competence', 'WITH', )            
+        ->setParameter('competence', $competence)            
+        ->orderBy('a.id', 'ASC')            
+        ->getQuery()            
+        ->getResult()        
+        ;    
+    }
+
+    public function atribuersByUser($user)    
+    {        
+        return $this->createQueryBuilder('a')            
+        ->andWhere('user.id = :user')            
+        ->leftJoin('a.user', 'user', 'WITH', )            
+        ->setParameter('user', $user)            
+        ->orderBy('a.id', 'ASC')            
+        ->getQuery()            
+        ->getResult()        
+        ;    
+    }
+
     // /**
     //  * @return Atribuer[] Returns an array of Atribuer objects
     //  */

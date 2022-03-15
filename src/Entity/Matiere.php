@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
+
 /**
  * @ORM\Entity(repositoryClass=MatiereRepository::class)
  */
@@ -84,5 +85,13 @@ class Matiere
         }
 
         return $this;
+    }
+    public function getRow()
+    {
+        return array($this->id, $this->libelle);
+    }
+    public function getHeader()
+    {
+        return array('Identifiant', 'Libelle');
     }
 }
