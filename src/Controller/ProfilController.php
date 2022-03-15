@@ -18,9 +18,10 @@ class ProfilController extends AbstractController
     {
         $user = $this->getUser();
         $userIdUnique = $user->getIdUnique();
-
-        $atribuers = $repo->atribuersByUser($userIdUnique);
-
+        if(isset($_GET['idUnique'])){
+         
+        $atribuers = $repo->atribuersByUser($_GET['idUnique']);
+    }
 
         return $this->render('profil/profil.html.twig', ['atribuers' => $atribuers]);
     }

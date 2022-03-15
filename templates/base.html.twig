@@ -34,7 +34,7 @@
 			{% if app.user %}
 				<a class="navItem" href="{{path("resultat")}}">recherche</a>
 				<a class="navItem" href="{{path("inscription")}}">Ajouter un utilisateur</a>
-            	<a class="navItem" href="{{path("profil")}}">{{ app.user.username }}</a>
+            	<a class="navItem" href="{{path('profil', {'idUnique':app.user.idUnique})}}">{{ app.user.username }}</a>
 			{% endif %}
 			<a class="navItem" href="{{ path('app_logout') }}">Déconnexion</a>
 			<a class="navItem" href="{{path("contact")}}">Contact</a>
