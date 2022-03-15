@@ -32,11 +32,8 @@
   height: 300em;
   display: inline-block;
   margin: -50px 370px 50px 370px;
-  /*margin: 0 auto;*/
   border: 2px solid black;
   border-radius: 12px;
-  /*padding: 4px;*/
-  overflow-y: scroll;
   position: relative;
 }
 
@@ -45,48 +42,73 @@
   font-size: 20px;
 }
 
+#messages-container {
+  height: 720px;
+  width: 1105px;
+  overflow-y: scroll;
+}
+
 #input-container {
+  display: flex;
+  flex-direction: row;
   position: absolute;
   bottom: 0;
-  padding-bottom: 5px;
-}
-
-#input {
-  max-height:100px;
-  min-height:100px;
-  resize: none;
+  padding-bottom: 5px
 }
 </style>
-
 {% endblock %}
 
 {% block contenu %}
 </header>
 
 <div class="container" id="main-container">
-  <div class="container" id="user-container">
-      <a style="color: rgb(0,0,255,1);"> {{app.user.IdUnique}} </a>  >>>  <a style="color: rgb(255,0,0,1);"> Utilisateur </a>
-  </div>
-  <div class="container" id="messages-container">
-    <!--
-      Montre tout les messages de l'utilisateur, et met son fond en rouge si l'utilisateur n'a pas vu le message et qu'il n'est pas l'émetteur.
-    -->
-    {% for e in contacts %}
-    
-      <div class="container darker" {% if e.vu == 0 and e.emetteur != app.user %} style="background-color: rgb(255,0,0,0.4);" {% endif %}>
-        {{e.emetteur.idUnique}}
-        <br>
-        <p>{{e.message}}</p>
-        <span class="time-right" style="color: rgb(0,0,0,1);">{{e.dateMessage|date("g:i")}}</span>
-      </div>
+    {{ form_start(form) }}
 
-    {% endfor %}
-  </div>
-  <div id="input-container">
-    <textarea id="input" rows="4" cols="132" autofocus="true" placeholder="Entrer un message...">
-    </textarea>
-  </div>
+    <div class="container" id="user-container">
+        <a {% if is_granted('ROLE_ADMIN') %} style="color: rgb(255,0,0,1);" {% else %} style="color: rgb(0,0,255,1);" {% endif %}> 
+          {{app.user.IdUnique}}
+        </a>
+          >>>  
+        <a style="color: rgb(0,0,255,1);"> Utilisateur </a>
+    </div>
+
+    <div class="container" id="messages-container">
+      <!--
+        Montre tout les messages de l'utilisateur, et met son fond en rouge si l'utilisateur n'a pas vu le message et qu'il n'est pas l'émetteur.
+      -->
+      {% for e in contacts %}
+
+        {% if e.emetteur.id == app.user.id or e.recepteur.id == app.user.id %}
+          <div class="container darker" {% if e.vu == 0 %} style="background-color: rgb(255,0,0,0.4);" {% endif %}>
+            {{e.emetteur.idUnique}}
+            <br>
+            <p>{{e.message}}</p>
+            <span class="time-right" style="color: rgb(0,0,0,1);">{{e.dateMessage|date("j F à G:i")}}</span>
+          </div>
+        {% endif %}
+
+      {% endfor %}
+    </div>
+
+    <div id="input-container">
+    <!--
+      <textarea id="message" class="form-control" rows="2" cols="117" autofocus="true" placeholder="Entrer un message..."></textarea>
+      <button type="submit" class="btn btn-primary btn-lg">Envoyer</button>
+    -->
+      {{ form_widget(form.message, {'attr': {'class': 'form-control', 'rows': '2', 'cols': '117', 'autofocus': 'true', 'placeholder': 'Entrer un message...', 'style': 'resize: none;'}}) }}
+      {{ form_widget(form.valider, {'label':"Envoyer", 'attr': {'class': 'btn btn-primary btn-lg'}}) }}
+
+      {{ form_widget(form.emetteur, {'value':"{{ app.user.id }}"}) }}
+      {{ form_widget(form.recepteur, {'value': "2"}) }}
+    </div>
+
+    <!--
+      <input type="hidden" id="emetteur" value="{{ app.user.id }}">
+      <input type="hidden" id="recepteur" value="2">
+    -->
+
+    {{ form_end(form, {render_rest: true}) }}
+    
 </div>
 
 {% endblock %}
-
