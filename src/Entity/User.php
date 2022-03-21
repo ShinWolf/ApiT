@@ -10,8 +10,14 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity(
+ *     fields={"email"},
+ *     message="Un compte est déjà associé à cette adresse email, veuillez en choisir un autre ou vous connecter."
+ * )
  */
 #[ApiResource(normalizationContext:['groups' => ['read']], itemOperations: ["get"=>["security"=>"is_granted('ROLE_ADMIN') or object == user"], "patch"=>["security"=>"is_granted('ROLE_ADMIN') or object == user"]], collectionOperations: ["get"=>["security"=>"is_granted('ROLE_ADMIN')"], "post"])]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
@@ -26,6 +32,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\Email
      */
     #[Groups(["read"])]
     private $email;

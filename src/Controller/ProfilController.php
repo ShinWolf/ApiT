@@ -18,9 +18,23 @@ class ProfilController extends AbstractController
     {
         $user = $this->getUser();
         $userIdUnique = $user->getIdUnique();
-
-        $atribuers = $repo->atribuersByUser($userIdUnique);
+        if(isset($_GET['idUnique'])){
+         
+        $atribuers = $repo->atribuersByUser($_GET['idUnique']);
+    }
 
         return $this->render('profil/profil.html.twig', ['atribuers' => $atribuers]);
     }
+
+     #[Route('/meProfil', name: 'meProfil')]
+     public function meProfil(AtribuerRepository $repo): Response
+     {
+         $user = $this->getUser();
+         $userIdUnique = $user->getIdUnique();
+        
+         $atribuers = $repo->atribuersByUser($userIdUnique);
+     
+ 
+         return $this->render('profil/meProfil.html.twig', ['atribuers' => $atribuers]);
+     }
 }

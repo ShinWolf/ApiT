@@ -25,7 +25,7 @@ class Atribuer
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    #[Groups(["read"])]
+    #[Groups(["read", "write"])]
     private $nbValider;
 
     /**
