@@ -32,7 +32,7 @@
 				<a class="navItem" href="{{path("app_login")}}">Connexion</a>
 			{% else %}
 			{% if app.user %}
-				<a class="navItem" href="{{path("resultat")}}">recherche</a>
+				<a class="navItem" href="{{path("resultat")}}">Recherche</a>
 				<a class="navItem" href="{{path("inscription")}}">Ajouter un utilisateur</a>
             	<a class="navItem" href="{{path('meProfil')}}">{{ app.user.username }}</a>
 			{% endif %}

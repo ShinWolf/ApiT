@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     message="Un compte est déjà associé à cette adresse email, veuillez en choisir un autre ou vous connecter."
  * )
  */
-#[ApiResource(normalizationContext:['groups' => ['read']], itemOperations: ["get"=>["security"=>"is_granted('ROLE_ADMIN') or object == user"], "patch"=>["security"=>"is_granted('ROLE_ADMIN') or object == user"]], collectionOperations: ["get"=>["security"=>"is_granted('ROLE_ADMIN')"]])]
+#[ApiResource(denormalizationContext:['groups' => ['write']],normalizationContext:['groups' => ['read']], itemOperations: ["get"=>["security"=>"is_granted('ROLE_ADMIN') or object == user"], "patch"=>["security"=>"is_granted('ROLE_ADMIN') or object == user"]], collectionOperations: ["post","get"=>["security"=>"is_granted('ROLE_ADMIN')"]])]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
@@ -34,7 +34,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\Email
      */
-    #[Groups(["read"])]
+    #[Groups(["read","write"])]
     private $email;
 
     /**
@@ -47,6 +47,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
+    #[Groups(["write"])]
     private $password;
 
     /**
