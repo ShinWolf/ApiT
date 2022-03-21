@@ -13,7 +13,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
-#[ApiResource(normalizationContext:['groups' => ['read']], itemOperations: ["get"=>["security"=>"is_granted('ROLE_ADMIN') or object == user"], "patch"=>["security"=>"is_granted('ROLE_ADMIN') or object == user"]], collectionOperations: ["get"=>["security"=>"is_granted('ROLE_ADMIN')"]])]
+#[ApiResource(normalizationContext:['groups' => ['read']], itemOperations: ["get"=>["security"=>"is_granted('ROLE_ADMIN') or object == user"], "patch"=>["security"=>"is_granted('ROLE_ADMIN') or object == user"]], collectionOperations: ["get"=>["security"=>"is_granted('ROLE_ADMIN')"], "post"])]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
