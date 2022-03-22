@@ -19,7 +19,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     message="Un compte est déjà associé à cette adresse email, veuillez en choisir un autre ou vous connecter."
  * )
  */
+<<<<<<< HEAD
 #[ApiResource(normalizationContext:['groups' => ['read']], itemOperations: ["get"=>["security"=>"is_granted('ROLE_ADMIN') or object == user"], "patch"=>["security"=>"is_granted('ROLE_ADMIN') or object == user"]], collectionOperations: ["get"=>["security"=>"is_granted('ROLE_ADMIN')"], "post"])]
+=======
+#[ApiResource(denormalizationContext:['groups' => ['write']],normalizationContext:['groups' => ['read']], itemOperations: ["get"=>["security"=>"is_granted('ROLE_ADMIN') or object == user"], "patch"=>["security"=>"is_granted('ROLE_ADMIN') or object == user"]], collectionOperations: ["post","get"=>["security"=>"is_granted('ROLE_ADMIN')"]])]
+>>>>>>> d4248fffd1f30a00fb65c0e71745b36c9c62ba77
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
@@ -34,7 +38,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\Email
      */
-    #[Groups(["read"])]
+    #[Groups(["read","write"])]
     private $email;
 
     /**
@@ -47,6 +51,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
+    #[Groups(["write"])]
     private $password;
 
     /**
